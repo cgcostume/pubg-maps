@@ -6,7 +6,7 @@ Download [8192px x 8192px, 16bit, grayscale, png](https://github.com/cgcostume/p
 
 ![pubg_erangel_elevation_preview](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_elevation_l16_preview.png)
 
-Please note that the preview image is downscaled to 8bit 512x512 instead and contrast is enhanced.
+Please note that the preview image is downscaled to 8bit 512x512 and contrast is enhanced.
 
 
 #### Erangel Normal Map
