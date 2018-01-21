@@ -1,6 +1,6 @@
 # PlayerUnknown's Battlegrounds | Terrain Maps
 
-PlayerUnknown's Battlegrounds currently features two maps: `Erangle` and `Miramar`. This repository provides information and scripts for extracting elevation and normal maps from the game's sources. In addition, the extracted maps are available as well in full, losless detail.
+PlayerUnknown's Battlegrounds currently features two maps: `Erangel` and `Miramar`. This repository provides information and scripts for extracting elevation and normal maps from the game's sources. In addition, the extracted maps are available as well in full, losless detail.
 
 #### Erangel Elevation/Height Map
 
@@ -38,7 +38,11 @@ Please not that the following steps might change with respect to the PUBG versio
 
 I tried to run steps 1. to 3. via a script as well but couldn't settle on how to provide and handle ue4pakunpacker yet. Feel free to have a look in `pubg-pak-unpack.py`. 
 
-4. ToDo
+4. **Run** `pubg-ubulk-slice.py` for extracting and encoding the relevant tile data into losless 16bit and 8bit pngs.
+```
+.\pubg-ubulk-slice.py --map erangel -tsl C:\TslGame
+```
+5. **Run** `
 
 
 #### Details on the Map Encoding
@@ -47,9 +51,10 @@ Elevation and normals are packed into 512px x 512px x 32bit tiles. The first byt
 
 The following paragraphs enumerate the relevant tiles: the first two indices identify the `Heightmap_x#_y#_sharedAssets` group/directory, the following array contains the indices of tiles with normal/elevation data encoded.
 
-###### Erangle Stitch Indices
+###### Erangel Stitch Indices
 
 ```
+ubulk_indices = [ 
     (0, 0, [0,  1,  2,  3,  4,  5,  6,  7, 10, 19, 30, 36, 37, 38, 39, 40])
   , (0, 1, [0,  1,  2,  3,  4,  5,  6,  7,  9, 19, 30, 36, 40, 43, 44, 45])
   , (0, 2, [0,  1,  2,  3,  4,  5,  6,  7, 10, 18, 26, 37, 48, 50, 51, 52])
@@ -65,7 +70,15 @@ The following paragraphs enumerate the relevant tiles: the first two indices ide
   , (3, 0, [0,  1,  2,  3,  4,  5,  6,  7, 10, 18, 28, 33, 34, 35, 36, 37])
   , (3, 1, [0,  1,  2,  3,  4,  5,  6,  7, 10, 19, 28, 34, 35, 36, 37, 38])
   , (3, 2, [0,  1,  2,  3,  4,  5,  6,  7, 12, 19, 24, 30, 38, 42, 47, 48])
-  , (3, 3, [0,  1,  2,  3,  4,  5,  6,  7,  9, 18, 19, 20, 21, 22, 23, 24]) 
+  , (3, 3, [0,  1,  2,  3,  4,  5,  6,  7,  9, 18, 19, 20, 21, 22, 23, 24]) ]
+  
+ubulk_sequence = [ 
+      (0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3)
+	, (2, 0), (2, 1), (2, 2), (2, 3), (3, 0), (3, 1), (3, 2), (3, 3)]
+
+tile_sequence = [
+      (3, 3), (2, 3), (1, 1), (0, 1), (3, 0), (2, 0), (1, 0), (0, 0)
+	, (1, 3), (0, 3), (3, 2), (2, 2), (1, 2), (0, 2), (3, 1), (2, 1)]
 ```  
 
 ###### Miramar Stitch Indices
