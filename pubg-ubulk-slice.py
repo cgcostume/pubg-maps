@@ -16,6 +16,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-tsl', '--tslgame_path', help = 'TslGame path', default = r'C:\TslGame')
 parser.add_argument('-o', '--output_path', help = 'working directory for extracting and stitching assets', default = '.')
 parser.add_argument('-m', '--map', help = 'map identifier, either Erangel or Miramar', default = 'erangel')
+parser.add_argument('-l', '--lod', help = 'level-of-detail, either 0, 1, or 2', default = '0')
+
 args = parser.parse_args()
 
 # pakFileNamesByMapNames = {
@@ -52,17 +54,18 @@ if not os.path.isdir(normal_path):
 if not os.path.isdir(height_path):
 	os.makedirs(height_path)
 
+lod = int(args.lod)
+
 
 # slicing data
 
-tile_width = 512
-tile_height = 512
+tile_width = { 0: 512, 1: 256, 2: 128 }[lod]
+tile_height = { 0: 512, 1: 256, 2: 128 }[lod]
 tile_channels = 4
+tile_offset = int({ 0: 0, 1: 512 * 512 * 4 * (1.0), 2: 512 * 512 * 4 * (1.0 + 0.25)}[lod])
 
 tile_size = int(tile_width * tile_height)
-
 tile_size_with_mipmaps = int(tile_size * tile_channels * (1.00 + 0.25 + 0.0625))
-tile_offset = int(tile_size * tile_channels * (0.25 + 0.0625))
 
 
 ubulk_indices_erangel = [ 
@@ -161,6 +164,7 @@ def slice_tiles(asset_path, offsets, indices):
 
 		ubulk = open(ubulk_path, "rb")
 
+		ubulk.seek(tile_offset)
 		tile = ubulk.read(tile_size * tile_channels)
 		if not tile:
 	 		print('index not found', asset_path, tile_index)
@@ -248,8 +252,8 @@ for file_path in glob.glob(os.path.join(normal_path, normal_semantic + '_*.png')
 	ubulk_composite.paste(tile, (x, y))
 	tile_index += 1
 
-normal_stitched_path = os.path.join(output_path, 'pubg_' + mapIdentifier + '_' + normal_semantic + '.png')
-print (normal_stitched_path, 'saving 8k normal map ... hang in there')
+normal_stitched_path = os.path.join(output_path, 'pubg_' + mapIdentifier + '_' + normal_semantic + '_lod' + str(lod) + '.png')
+print (normal_stitched_path, 'saving', ['8k', '4k', '2k'][lod], 'normal map ... hang in there')
 ubulk_composite.save(normal_stitched_path)
 
 
@@ -270,6 +274,6 @@ for file_path in glob.glob(os.path.join(height_path, height_semantic + '_*.png')
  	tile_index += 1
 
 
-height_stitched_path = os.path.join(output_path, 'pubg_' + mapIdentifier + '_' + height_semantic + '.png')
-print (height_stitched_path, 'saving 8k height map ... hang in there')
+height_stitched_path = os.path.join(output_path, 'pubg_' + mapIdentifier + '_' + height_semantic + '_lod' + str(lod) + '.png')
+print (normal_stitched_path, 'saving', ['8k', '4k', '2k'][lod], 'height map ... hang in there')
 ubulk_composite.save(height_stitched_path)
