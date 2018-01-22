@@ -30,12 +30,11 @@ Please not that the following steps might change with respect to the PUBG versio
 
 I tried to run steps 1. to 3. via a script as well but couldn't settle on how to provide and handle ue4pakunpacker yet. Feel free to have a look in `pubg-pak-unpack.py`. 
 
-4. **Run** `pubg-ubulk-slice.py` for extracting and encoding the relevant tile data into losless 16bit and 8bit pngs:
+4. **Run** `pubg-ubulk-slice.py` for extracting and encoding the relevant tile data into losless 16bit and 8bit pngs (required pip packages: `numpy`, `pypng`, and `Pillow`):
 ```
 .\pubg-ubulk-slice.py --map erangel -tsl C:\TslGame --lod 0
 .\pubg-ubulk-slice.py --map miramar -tsl C:\TslGame --lod 0
 ```
-
 That's it. If the script exits without errors there shoud be 8192px &times; 8192px losless height and normal maps.
 
 
