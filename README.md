@@ -1,19 +1,24 @@
 # PlayerUnknown's Battlegrounds | Terrain Maps
 
-PlayerUnknown's Battlegrounds currently features two maps: `Erangel` and `Miramar`. This repository provides information and scripts for extracting elevation and normal maps from the game's sources. In addition, the extracted maps are available as well in full, losless detail.
+PlayerUnknown's Battlegrounds currently features two maps: Erangel and Miramar. This repository provides information and scripts for extracting elevation and normal maps from the game's sources. In addition, the extracted maps are available as well in full, losless detail.
 
-Please note that all preview images are downscaled to 8bit 1024px &times; 1024px.
+Please note that all preview images are downscaled to 8bit 512px &times; 512px and should not be used for rendering (normal data is downsampled using bicubic resampling).
 
 | Erangel Height Map | Erangel Normal Map |
 |--------------------|--------------------|
 | <img src="https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16_preview.png" width="100%" alt="pubg_erangel_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_preview.png" width="100%" alt="pubg_erangel_normal_preview"> |
-| Download [8192px x 8192px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16.png) |  Download [8192px x 8192px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8.png) |
+| Download losless Height Maps | Download losless Normal Maps |
+| :godmode: [LOD0 8192px &times; 8192px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16_lod0.png) | :godmode: [LOD0 8192px &times; 8192px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_lod0.png) |
+| :suspect: [LOD1 4096px &times; 4096px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16_lod1.png) | :suspect: [LOD1 4096px &times; 4096px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_lod1.png) |
+| :hurtrealbad: [LOD2 2048px &times; 2048px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16_lod2.png) | :hurtrealbad: [LOD1 2048px &times; 2048px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_lod2.png) |
 
 | Miramar Height Map | Miramar Normal Map |
 |--------------------|--------------------|
 | <img src="https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16_preview.png" width="100%" alt="pubg_miramar_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8_preview.png" width="100%" alt="pubg_erangel_normal_preview"> |
-| Download [8192px x 8192px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16.png) | Download [8192px x 8192px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8.png) |
-
+| Download losless Height Maps | Download losless Normal Maps |
+| :godmode: [LOD0 8192px &times; 8192px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16_lod0.png) | :godmode: [LOD0 8192px &times; 8192px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8_lod0.png) |
+| :suspect: [LOD1 4096px &times; 4096px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16_lod1.png) | :suspect: [LOD1 4096px &times; 4096px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8_lod1.png) |
+| :hurtrealbad: [LOD2 2048px &times; 2048px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16_lod2.png) | :hurtrealbad: [LOD1 2048px &times; 2048px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8_lod2.png) |
 
 ## How-To/DIY
 
@@ -27,8 +32,8 @@ I tried to run steps 1. to 3. via a script as well but couldn't settle on how to
 
 4. **Run** `pubg-ubulk-slice.py` for extracting and encoding the relevant tile data into losless 16bit and 8bit pngs:
 ```
-.\pubg-ubulk-slice.py --map erangel -tsl C:\TslGame
-.\pubg-ubulk-slice.py --map miramar -tsl C:\TslGame
+.\pubg-ubulk-slice.py --map erangel -tsl C:\TslGame --lod 0
+.\pubg-ubulk-slice.py --map miramar -tsl C:\TslGame --lod 0
 ```
 
 That's it. If the script exits without errors there shoud be 8192px &times; 8192px losless height and normal maps.
