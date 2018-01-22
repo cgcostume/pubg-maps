@@ -35,7 +35,7 @@ I tried to run steps 1. to 3. via a script as well but couldn't settle on how to
 .\pubg-ubulk-slice.py --map erangel -tsl C:\TslGame --lod 0
 .\pubg-ubulk-slice.py --map miramar -tsl C:\TslGame --lod 0
 ```
-That's it. If the script exits without errors there shoud be 8192px &times; 8192px losless height and normal maps. The `--lod` parameter can be used for level of detail of `0` (8k map), `1` (4k map), and `2` (2k map).
+That's it. If the script exits without errors there shoud be 8192px &times; 8192px losless height and normal maps. The `--lod` parameter can be used for level of detail of `--lod 0` (8k map), `--lod 1` (4k map), and `--lod 2` (2k map).
 
 
 #### Details on the Map Encoding
