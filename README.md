@@ -4,18 +4,18 @@ PlayerUnknown's Battlegrounds currently features two maps: `Erangel` and `Mirama
 
 #### Erangel Elevation/Height Map
 
-Download [8192px x 8192px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_elevation_l16.png)
+Download [8192px x 8192px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16.png)
 
-![pubg_erangel_elevation_preview](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_elevation_l16_preview.png)
+![pubg_erangel_elevation_preview](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16_preview.png)
 
-Please note that the preview image is downscaled to 8bit 512x512 and contrast is enhanced.
+Please note that the preview image is downscaled to 8bit 512px &times; 512px.
 
 
 #### Erangel Normal Map
 
-Download [8192px x 8192px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_r8g8.png)
+Download [8192px x 8192px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8.png)
 
-![pubg_erangel_elevation_preview](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_r8g8_preview.png)
+![pubg_erangel_elevation_preview](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_preview.png)
 
 Please note that the preview image is downscaled to 512px &times; 512px.
 
