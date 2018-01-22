@@ -8,24 +8,32 @@ Download [8192px x 8192px, 16bit, grayscale, png](https://github.com/cgcostume/p
 
 ![pubg_erangel_elevation_preview](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16_preview.png)
 
-Please note that the preview image is downscaled to 8bit 512px &times; 512px.
+Please note that the preview image is downscaled to 8bit 1024px &times; 1024px.
 
 
 #### Erangel Normal Map
 
 Download [8192px x 8192px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8.png)
 
-![pubg_erangel_elevation_preview](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_preview.png)
+![pubg_erangel_normal_preview](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_preview.png)
 
-Please note that the preview image is downscaled to 512px &times; 512px.
+Please note that the preview image is downscaled to 1024px &times; 1024px.
 
 #### Miramar Elevation/Height Map
 
-ToDo
+Download [8192px x 8192px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16.png)
+
+![pubg_miramar_elevation_preview](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16_preview.png)
+
+Please note that the preview image is downscaled to 8bit 1024px &times; 1024px.
 
 #### Miramar Normap Map
 
-ToDo
+Download [8192px x 8192px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8.png)
+
+![pubg_miramar_normal_preview](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8_preview.png)
+
+Please note that the preview image is downscaled to 1024px &times; 1024px.
 
 
 ## How-To/DIY
