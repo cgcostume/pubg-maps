@@ -8,17 +8,17 @@ Please note that all preview images are downscaled to 8bit 512px &times; 512px a
 |--------------------|--------------------|
 | <img src="https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16_preview.png" width="100%" alt="pubg_erangel_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_preview.png" width="100%" alt="pubg_erangel_normal_preview"> |
 | Download losless Height Maps | Download losless Normal Maps |
-| :godmode: [LOD0 8192px &times; 8192px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16_lod0.png) | :godmode: [LOD0 8192px &times; 8192px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_lod0.png) |
-| :suspect: [LOD1 4096px &times; 4096px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16_lod1.png) | :suspect: [LOD1 4096px &times; 4096px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_lod1.png) |
-| :hurtrealbad: [LOD2 2048px &times; 2048px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16_lod2.png) | :hurtrealbad: [LOD1 2048px &times; 2048px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_lod2.png) |
+| :godmode: [8192px &times; 8192px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16_lod0.png) | :godmode: [8192px &times; 8192px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_lod0.png) |
+| :suspect: [4096px &times; 4096px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16_lod1.png) | :suspect: [4096px &times; 4096px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_lod1.png) |
+| :hurtrealbad: [2048px &times; 2048px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16_lod2.png) | :hurtrealbad: [2048px &times; 2048px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_lod2.png) |
 
 | Miramar Height Map | Miramar Normal Map |
 |--------------------|--------------------|
 | <img src="https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16_preview.png" width="100%" alt="pubg_miramar_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8_preview.png" width="100%" alt="pubg_erangel_normal_preview"> |
 | Download losless Height Maps | Download losless Normal Maps |
-| :godmode: [LOD0 8192px &times; 8192px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16_lod0.png) | :godmode: [LOD0 8192px &times; 8192px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8_lod0.png) |
-| :suspect: [LOD1 4096px &times; 4096px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16_lod1.png) | :suspect: [LOD1 4096px &times; 4096px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8_lod1.png) |
-| :hurtrealbad: [LOD2 2048px &times; 2048px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16_lod2.png) | :hurtrealbad: [LOD1 2048px &times; 2048px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8_lod2.png) |
+| :godmode: [8192px &times; 8192px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16_lod0.png) | :godmode: [8192px &times; 8192px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8_lod0.png) |
+| :suspect: [4096px &times; 4096px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16_lod1.png) | :suspect: [4096px &times; 4096px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8_lod1.png) |
+| :hurtrealbad: [2048px &times; 2048px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16_lod2.png) | :hurtrealbad: [2048px &times; 2048px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8_lod2.png) |
 
 ## How-To/DIY
 
