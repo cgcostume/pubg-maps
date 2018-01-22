@@ -28,14 +28,14 @@ Please not that the following steps might change with respect to the PUBG versio
 2. **Locate** your PUBG directory, e.g., `C:\Program Files (x86)\Steam\steamapps\common\PUBG`.
 3. **Unpack** `TslGame-WindowsNoEditor_erangel_heightmap.pak` or `TslGame-WindowsNoEditor_desert_heightmap.pak` for Erangel or Miramar respectively. This should create a `TslGame` folder directly in `C:`, i.e., `C:\TslGame\Content\Maps\Erangel\Art\Heightmap` or `C:\TslGame\Content\Maps\Desert\Art\Heightmap` respectively comprising all resources required.
 
-I tried to run steps 1. to 3. via a script as well but couldn't settle on how to provide and handle ue4pakunpacker yet. Feel free to have a look in `pubg-pak-unpack.py`. 
+I tried to run steps 1. to 3. via a script as well but couldn't settle on how to provide and handle ue4pakunpacker yet. Feel free to have a look in `pubg-pak-unpack.py`. The following script requires the pip packages: `numpy`, `pypng`, and `Pillow`.
 
-4. **Run** `pubg-ubulk-slice.py` for extracting and encoding the relevant tile data into losless 16bit and 8bit pngs (required pip packages: `numpy`, `pypng`, and `Pillow`):
+4. **Run** `pubg-ubulk-slice.py` for extracting and encoding the relevant tile data into losless 16bit and 8bit pngs:
 ```
 .\pubg-ubulk-slice.py --map erangel -tsl C:\TslGame --lod 0
 .\pubg-ubulk-slice.py --map miramar -tsl C:\TslGame --lod 0
 ```
-That's it. If the script exits without errors there shoud be 8192px &times; 8192px losless height and normal maps.
+That's it. If the script exits without errors there shoud be 8192px &times; 8192px losless height and normal maps. The `--lod` parameter can be used for level of detail of `--lod 0` (8k map), `--lod 1` (4k map), and `--lod 2` (2k map).
 
 
 #### Details on the Map Encoding
