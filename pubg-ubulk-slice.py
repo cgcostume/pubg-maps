@@ -1,13 +1,10 @@
 
 import argparse
-import glob
 import math
 import numpy
 import os
-import png
 import sys
 
-import PIL
 from PIL import Image
 
 # parse arguments
@@ -17,6 +14,7 @@ parser.add_argument('-tsl', '--tslgame_path', help = 'TslGame path', default = r
 parser.add_argument('-o', '--output_path', help = 'working directory for extracting and stitching assets', default = '.')
 parser.add_argument('-m', '--map', help = 'map identifier, either Erangel or Miramar', default = 'erangel')
 parser.add_argument('-l', '--lod', help = 'level-of-detail, either 0, 1, or 2', default = '0')
+parser.add_argument('-c', '--compress', help = 'compression level, number between 0 and 10', default = '0')
 
 args = parser.parse_args()
 
@@ -44,18 +42,10 @@ assert os.path.isdir(output_path)
 
 
 normal_semantic = 'normal_rg8'
-normal_path = os.path.join(output_path, '.normal_' + mapIdentifier)
-
 height_semantic = 'height_l16'
-height_path = os.path.join(output_path, '.height_' + mapIdentifier)
-
-if not os.path.isdir(normal_path):
-	os.makedirs(normal_path)
-if not os.path.isdir(height_path):
-	os.makedirs(height_path)
 
 lod = int(args.lod)
-
+compress = int(args.compress)
 
 # slicing data
 
@@ -65,7 +55,7 @@ tile_channels = 4
 tile_offset = int({ 0: 0, 1: 512 * 512 * 4 * (1.0), 2: 512 * 512 * 4 * (1.0 + 0.25)}[lod])
 
 tile_size = int(tile_width * tile_height)
-tile_size_with_mipmaps = int(tile_size * tile_channels * (1.00 + 0.25 + 0.0625))
+# tile_size_with_mipmaps = int(tile_size * tile_channels * (1.00 + 0.25 + 0.0625))
 
 
 ubulk_indices_erangel_in_sequence = [	
@@ -111,9 +101,7 @@ ubulk_indices_in_sequence = {
 	'miramar' : ubulk_indices_miramar_in_sequence }[mapIdentifier]
 
 
-
-
-def slice_tiles(asset_path, offsets, indices):
+def extract_tiles(asset_path, offsets, indices, height_target, normal_target):
 
 	
 	sequence_index = 0
@@ -129,7 +117,6 @@ def slice_tiles(asset_path, offsets, indices):
 	 		print('index not found', asset_path, tile_index)
 	 		break
 
-
 		# extract normal
 
 		normal_uint8 = numpy.fromstring(tile, numpy.uint8)
@@ -142,45 +129,36 @@ def slice_tiles(asset_path, offsets, indices):
 
 		rgb = numpy.dstack((channel_r, channel_g, channel_b)).flatten()
 
-
 		# extract elevation
 
 		height_uint16 = numpy.fromstring(tile[1:] + b'\x00', numpy.uint16)
-
 		channel_l = height_uint16[0::2]
-
 
 		# refine stitching sequence
 
 		x  = offsets[0] * 4 + int(i % 4)
 		y  = offsets[1] * 4 + int(i / 4)
 		ordered_index = y * 16 + x
-		
-		tile_identifier = '_' + '{0:03}'.format(ordered_index) 
-		normal_tile_path = os.path.join(normal_path, normal_semantic + tile_identifier + '.png')
-		height_tile_path = os.path.join(height_path, height_semantic + tile_identifier + '.png')
 
-		
+		# paste data
+
+		target_x = (ordered_index % 16) * tile_width
+		target_y = math.floor(ordered_index / 16) * tile_height
+
 		# write normal tile
 
-		tile_png = open(normal_tile_path, "wb")
-		png_writer = png.Writer(width = tile_width, height = tile_height, bitdepth = 8, compression = 9)
-		png_writer.write_array(tile_png, rgb)
-		tile_png.close()
-
+		normal_tile = Image.frombytes('RGB', (tile_width, tile_height), rgb)
+		normal_target.paste(normal_tile, (target_x, target_y))
 
 		# write height tile
 
-		tile_png = open(height_tile_path, "wb")
-		png_writer = png.Writer(width = tile_width, height = tile_height, greyscale = True,  bitdepth = 16, compression = 9)
-		png_writer.write_array(tile_png, channel_l)
-		tile_png.close()
-
+		height_tile = Image.frombytes('I;16', (tile_width, tile_height), numpy.asarray(channel_l, order = 'C'))
+		height_target.paste(height_tile, (target_x, target_y))
 
 		# display progress
 
 		progress = (offsets[0] * 4 + offsets[1]) * 16 + sequence_index + 1
-		print (normal_tile_path + ', ' + height_tile_path, '(' + str(progress).rjust(3, '0'), 'of 256)', flush = True, end = ('\r' if progress < 256 else '\n'))
+		print ('processing', str(progress).rjust(3, '0'), 'of 256', flush = True, end = ('\r' if progress < 256 else '\n'))
 
 		sequence_index += 1
 
@@ -188,51 +166,22 @@ def slice_tiles(asset_path, offsets, indices):
 
 
 
+print ('extracting 256 tiles (normal and height data) ...')
+
+normal_composite = Image.new("RGB", (tile_width * 16, tile_height * 16))
+height_composite = Image.new("I", (tile_width * 16, tile_height * 16))
+
 
 for indices in ubulk_indices_in_sequence:
  	# example 'C:\TslGame\Content\Maps\Erangel\Art\Heightmap\Heightmap_x0_y0_sharedAssets\Texture2D_0.ubulk'
-  	asset_path = os.path.join(tsl_heightmap_path, 'Heightmap_x%d_y%d_sharedAssets' % (indices[0], indices[1]))
-  	slice_tiles(asset_path, (indices[0], indices[1]), indices[2])
+	asset_path = os.path.join(tsl_heightmap_path, 'Heightmap_x%d_y%d_sharedAssets' % (indices[0], indices[1]))
+	extract_tiles(asset_path, (indices[0], indices[1]), indices[2], height_composite, normal_composite)
 
-
-
-
-print ('stitching 256 normal tiles ...')
-ubulk_composite = Image.new("RGB", (tile_width * 16, tile_height * 16))
-
-tile_index = 0
-for file_path in glob.glob(os.path.join(normal_path, normal_semantic + '_*.png')):
-
-	tile = Image.open(file_path)
-
-	x = (tile_index % 16) * tile_width
-	y = math.floor(tile_index / 16) * tile_height
-
-	ubulk_composite.paste(tile, (x, y))
-	tile_index += 1
 
 normal_stitched_path = os.path.join(output_path, 'pubg_' + mapIdentifier + '_' + normal_semantic + '_lod' + str(lod) + '.png')
 print (normal_stitched_path, 'saving', ['8k', '4k', '2k'][lod], 'normal map ... hang in there')
-ubulk_composite.save(normal_stitched_path)
-
-
-
-
-print ('stitching 256 height tiles ...')
-ubulk_composite = Image.new("I", (tile_width * 16, tile_height * 16))
-
-tile_index = 0
-for file_path in glob.glob(os.path.join(height_path, height_semantic + '_*.png')):
-	
- 	tile = Image.open(file_path)
-	
- 	x = (tile_index % 16) * tile_width
- 	y = math.floor(tile_index / 16) * tile_height
-
- 	ubulk_composite.paste(tile, (x, y))
- 	tile_index += 1
-
+normal_composite.save(normal_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
 
 height_stitched_path = os.path.join(output_path, 'pubg_' + mapIdentifier + '_' + height_semantic + '_lod' + str(lod) + '.png')
 print (normal_stitched_path, 'saving', ['8k', '4k', '2k'][lod], 'height map ... hang in there')
-ubulk_composite.save(height_stitched_path)
+height_composite.save(height_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
