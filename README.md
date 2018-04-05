@@ -9,20 +9,33 @@ Please note that all preview images are downscaled to 8bit 512px &times; 512px a
 | <img src="https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16_preview.png" width="100%" alt="pubg_erangel_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_preview.png" width="100%" alt="pubg_erangel_normal_preview"> |
 | Download Height Maps | Download Normal Maps |
 | :godmode: [8192px &times; 8192px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16_lod0.png) | :godmode: [8192px &times; 8192px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_lod0.png) |
-| :suspect: [4096px &times; 4096px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16_lod1.png) | :suspect: [4096px &times; 4096px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_lod1.png) |
-| :hurtrealbad: [2048px &times; 2048px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16_lod2.png) | :hurtrealbad: [2048px &times; 2048px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_lod2.png) |
 
 | Miramar Height Map | Miramar Normal Map |
 |--------------------|--------------------|
 | <img src="https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16_preview.png" width="100%" alt="pubg_miramar_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8_preview.png" width="100%" alt="pubg_erangel_normal_preview"> |
 | Download Height Maps | Download Normal Maps |
 | :godmode: [8192px &times; 8192px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16_lod0.png) | :godmode: [8192px &times; 8192px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8_lod0.png) |
-| :suspect: [4096px &times; 4096px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16_lod1.png) | :suspect: [4096px &times; 4096px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8_lod1.png) |
-| :hurtrealbad: [2048px &times; 2048px, 16bit, grayscale, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16_lod2.png) | :hurtrealbad: [2048px &times; 2048px, 8bit, rgb, png](https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8_lod2.png) |
 
 ## How-To/DIY
 
-Please not that the following steps might change with respect to the PUBG version, asset provisioning and structure.
+Please note that the following steps might change with respect to the PUBG version, asset provisioning and structure.
+
+1. **Download** the UE Viewer by Gildor's Homepage  (`umodel.exe`) - google for it, the sha256 hash of my file is (`56FAB4D29AC7B7800FA6B480D2C2BDA4A7FEC91CCE8B00A8DB77B71849047E96`) and it seems to be legit.
+2. **Locate** your PUBG directory, e.g., `C:\Program Files (x86)\Steam\steamapps\common\PUBG`.
+3. **Open** `TslGame-WindowsNoEditor_erangel_heightmap.pak` or `TslGame-WindowsNoEditor_desert_heightmap.pak` (or any other of the pak files...). Please note that the pak files were AES encrypted recently (try google the AES key, e.g., on reddit or gildor's forum).
+4. **Filter** for `HeightMap` or `Texture2D_` (optional step)
+5. **Export** all height maps. This should create a `UmodelExport\Maps\Desert\Art\Heightmap` and `UmodelExport\Maps\Erangel\Art\Heightmap` folder in your current working directory.
+6. **Run** `pubg-tga-slice.py` for extracting and encoding the relevant tile data into losless 16bit and 8bit pngs:
+```
+.\pubg-tga-slice.py -p .\UmodelExport\ -m erangel
+.\pubg-tga-slice.py -p .\UmodelExport\ -m miramar
+```
+That's it. If the script exits without errors there shoud be 8192px &times; 8192px losless height and normal maps.
+
+
+## How-To/DIY | DEPRECATED (ubulk approach)
+
+Please note that the following steps might change with respect to the PUBG version, asset provisioning and structure.
 
 1. **Download** the UE4 pak-file Unpacker by Haoose v0.5 (`ue4pakunpacker.exe`) - google for it, the sha256 hash of my file is (`A00A579504D0594BE15377DB5DE07D916AD5E1047D15AD555B5A109E71219B5E`) and it seems to be legit.
 2. **Locate** your PUBG directory, e.g., `C:\Program Files (x86)\Steam\steamapps\common\PUBG`.
