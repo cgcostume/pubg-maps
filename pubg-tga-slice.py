@@ -13,7 +13,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-p', '--umodel_export_path', help = 'umodel export path')
 parser.add_argument('-o', '--output_path', help = 'working directory for extracting and stitching assets', default = '.')
 parser.add_argument('-m', '--map', help = 'map identifier, either Erangel or Miramar', default = 'erangel')
-parser.add_argument('-l', '--lod', help = 'level-of-detail, either 0, 1, or 2', default = '0')
+# parser.add_argument('-l', '--lod', help = 'level-of-detail, either 0, 1, or 2', default = '0')
 parser.add_argument('-c', '--compress', help = 'compression level, number between 0 and 10', default = '0')
 
 args = parser.parse_args()
@@ -44,13 +44,13 @@ assert os.path.isdir(output_path)
 normal_semantic = 'normal_rg8'
 height_semantic = 'height_l16'
 
-lod = int(args.lod)
+lod = 0 # int(args.lod)
 compress = int(args.compress)
 
 # slicing data
 
-tile_width = 512 # { 0: 512, 1: 256, 2: 128 }[lod]
-tile_height = 512 # { 0: 512, 1: 256, 2: 128 }[lod]
+tile_width = { 0: 512, 1: 256, 2: 128 }[lod]
+tile_height = { 0: 512, 1: 256, 2: 128 }[lod]
 # tile_channels = 4
 # tile_offset = int({ 0: 0, 1: 512 * 512 * 4 * (1.0), 2: 512 * 512 * 4 * (1.0 + 0.25)}[lod])
 
@@ -82,8 +82,8 @@ def extract_tiles(asset_path, offsets, height_target, normal_target):
 
 			# # extract elevation
 
-			# height_uint16 = numpy.fromstring(tile[1:] + b'\x00', numpy.uint16)
-			# channel_l = height_uint16[0::2]
+			channel_l = numpy.left_shift(numpy.asarray(tile_r, numpy.uint16()).flatten(), 8)
+			channel_l = channel_l + numpy.asarray(tile_g).flatten()
 		
 			# refine stitching sequence
 
@@ -104,9 +104,6 @@ def extract_tiles(asset_path, offsets, height_target, normal_target):
 
 			# write height tile
 
-			channel_l = numpy.left_shift(numpy.asarray(tile_r, numpy.uint16()).flatten(), 8)
-			channel_l = channel_l + numpy.asarray(tile_g).flatten()
-		
 			height_tile = Image.frombytes('I;16', (tile_width, tile_height), numpy.asarray(channel_l, order = 'C'))
 			height_target.paste(height_tile, (target_x, target_y))
 
