@@ -150,13 +150,13 @@ for indices in [(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), 
 	asset_path = os.path.join(umodel_heightmap_path, path)
 	extract_tiles(asset_path, (indices[0], indices[1]), height_composite, normal_composite)
 
-if smallMap:
-	lod = lod + 1
+
+map_size_info  = ['8k', '4k', '2k'][(lod + 1) if smallMap else lod]
 
 normal_stitched_path = os.path.join(output_path, 'pubg_' + mapIdentifier + '_' + normal_semantic + '_lod' + str(lod) + '.png')
-print (normal_stitched_path, 'saving', ['8k', '4k', '2k'][lod], 'normal map ... hang in there')
+print (normal_stitched_path, 'saving', map_size_info, 'normal map ... hang in there')
 normal_composite.save(normal_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
 
 height_stitched_path = os.path.join(output_path, 'pubg_' + mapIdentifier + '_' + height_semantic + '_lod' + str(lod) + '.png')
-print (normal_stitched_path, 'saving', ['8k', '4k', '2k'][lod], 'height map ... hang in there')
+print (normal_stitched_path, 'saving', map_size_info, 'height map ... hang in there')
 height_composite.save(height_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
