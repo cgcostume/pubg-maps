@@ -1,6 +1,6 @@
 # PlayerUnknown's Battlegrounds | Terrain Maps
 
-PlayerUnknown's Battlegrounds currently features two maps: Erangel and Miramar. This repository provides information and scripts for extracting elevation and normal maps from the game's sources. In addition, the extracted maps are available as well in full, losless detail.
+PlayerUnknown's Battlegrounds currently features two maps: Erangel, Miramar, and Sahok. This repository provides information and scripts for extracting elevation and normal maps from the game's sources. In addition, the extracted maps are available as well in full, losless detail.
 
 Please note that all preview images are downscaled to 8bit 512px &times; 512px and should not be used for rendering (normal data is downsampled using bicubic resampling).
 
@@ -22,13 +22,14 @@ Please note that the following steps might change with respect to the PUBG versi
 
 1. **Download** the UE Viewer by Gildor's Homepage  (`umodel.exe`) - google for it, the sha256 hash of my file is (`56FAB4D29AC7B7800FA6B480D2C2BDA4A7FEC91CCE8B00A8DB77B71849047E96`) and it seems to be legit.
 2. **Locate** your PUBG directory, e.g., `C:\Program Files (x86)\Steam\steamapps\common\PUBG`.
-3. **Open** `TslGame-WindowsNoEditor_erangel_heightmap.pak` or `TslGame-WindowsNoEditor_desert_heightmap.pak` (or any other of the pak files...). Please note that the pak files were AES encrypted recently (try google the AES key, e.g., on reddit or gildor's forum).
+3. **Open** `TslGame-WindowsNoEditor_erangel_heightmap.pak`, `TslGame-WindowsNoEditor_desert_heightmap.pak`, or `TslGame-WindowsNoEditor_savage_heightmap.pak` (or any other of the pak files...). Please note that the pak files were AES encrypted recently (try google the AES key, e.g., on reddit or gildor's forum).
 4. **Filter** for `HeightMap` or `Texture2D_` (optional step)
-5. **Export** all height maps. This should create a `UmodelExport\Maps\Desert\Art\Heightmap` and `UmodelExport\Maps\Erangel\Art\Heightmap` folder in your current working directory.
+5. **Export** all height maps. This should create a `UmodelExport\Maps\Desert\Art\Heightmap`, `UmodelExport\Maps\Erangel\Art\Heightmap`, or `UmodelExport\Maps\Savage\Art\Heightmap` folder in your current working directory.
 6. **Run** `pubg-tga-slice.py` for extracting and encoding the relevant tile data into losless 16bit and 8bit pngs:
 ```
 .\pubg-tga-slice.py -p .\UmodelExport\ -m erangel
 .\pubg-tga-slice.py -p .\UmodelExport\ -m miramar
+.\pubg-tga-slice.py -p .\UmodelExport\ -m sahok
 ```
 That's it. If the script exits without errors there shoud be 8192px &times; 8192px losless height and normal maps.
 
