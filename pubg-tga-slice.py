@@ -25,14 +25,14 @@ args = parser.parse_args()
 tslHeightmapPathsByMap =  {
 	'erangel' : r'Maps\Erangel\Art\Heightmap', 
 	'miramar' : r'Maps\Desert\Art\Heightmap',
-	'sahok' : r'Maps\Savage\Art\Heightmap', }
+	'sanhok' : r'Maps\Savage\Art\Heightmap', }
 
 
 mapIdentifier = args.map.lower()
-if mapIdentifier not in  {'erangel', 'miramar', 'sahok' }:
+if mapIdentifier not in  {'erangel', 'miramar', 'sanhok' }:
     sys.exit('unknown map identifier \'' + mapIdentifier + '\'')
 
-smallMap = mapIdentifier == 'sahok'
+smallMap = mapIdentifier == 'sanhok'
 numTiles = 64 if smallMap else 256
 
 
@@ -158,5 +158,5 @@ print (normal_stitched_path, 'saving', map_size_info, 'normal map ... hang in th
 normal_composite.save(normal_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
 
 height_stitched_path = os.path.join(output_path, 'pubg_' + mapIdentifier + '_' + height_semantic + '_lod' + str(lod) + '.png')
-print (normal_stitched_path, 'saving', map_size_info, 'height map ... hang in there')
+print (height_stitched_path, 'saving', map_size_info, 'height map ... hang in there')
 height_composite.save(height_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
