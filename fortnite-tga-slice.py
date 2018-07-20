@@ -193,7 +193,7 @@ map_size_info  = ['1.2k'][0]
 
 normal_stitched_path = os.path.join(output_path, 'fortnite_' + mapIdentifier + '_' + normal_semantic + '_lod' + str(lod) + '.png')
 print (normal_stitched_path, 'saving', map_size_info, 'normal map ... hang in there')
-normal_composite = normal_composite.transpose(Image.ROTATE_90)
+# normal_composite = normal_composite.transpose(Image.ROTATE_90)
 normal_composite.save(normal_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
 
 if args.thumbnail:
@@ -204,7 +204,7 @@ if args.thumbnail:
 
 height_stitched_path = os.path.join(output_path, 'fortnite_' + mapIdentifier + '_' + height_semantic + '_lod' + str(lod) + '.png')
 print (height_stitched_path, 'saving', map_size_info, 'height map ... hang in there')
-height_composite = height_composite.transpose(Image.ROTATE_90)
+# height_composite = height_composite.transpose(Image.ROTATE_90)
 height_composite.save(height_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
 
 if args.thumbnail:
