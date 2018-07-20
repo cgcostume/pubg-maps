@@ -15,6 +15,7 @@ parser.add_argument('-o', '--output_path', help = 'working directory for extract
 parser.add_argument('-m', '--map', help = 'map identifier, either erangel, miramar, or savage', default = 'erangel')
 # parser.add_argument('-l', '--lod', help = 'level-of-detail, either 0, 1, or 2', default = '0')
 parser.add_argument('-c', '--compress', help = 'compression level, number between 0 and 10', default = '0')
+parser.add_argument('-t', '--thumbnail', help = 'also generate 512² thumbnails', action = 'store_true')
 
 args = parser.parse_args()
 
@@ -153,10 +154,22 @@ for indices in [(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), 
 
 map_size_info  = ['8k', '4k', '2k'][(lod + 1) if smallMap else lod]
 
+
 normal_stitched_path = os.path.join(output_path, 'pubg_' + mapIdentifier + '_' + normal_semantic + '_lod' + str(lod) + '.png')
 print (normal_stitched_path, 'saving', map_size_info, 'normal map ... hang in there')
 normal_composite.save(normal_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
 
+if args.thumbnail:
+	normal_stitched_path = os.path.join(output_path, 'pubg_' + mapIdentifier + '_' + normal_semantic + '_preview.png')
+	normal_composite.thumbnail((512, 512), Image.BILINEAR)
+	normal_composite.save(normal_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
+
+
 height_stitched_path = os.path.join(output_path, 'pubg_' + mapIdentifier + '_' + height_semantic + '_lod' + str(lod) + '.png')
 print (height_stitched_path, 'saving', map_size_info, 'height map ... hang in there')
 height_composite.save(height_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
+
+if args.thumbnail:
+	height_stitched_path = os.path.join(output_path, 'pubg_' + mapIdentifier + '_' + height_semantic + '_preview.png')
+	height_composite.thumbnail((512, 512), Image.BILINEAR)
+	height_composite.save(height_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
