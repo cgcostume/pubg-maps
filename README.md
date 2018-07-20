@@ -22,7 +22,7 @@ Please note that all preview images are downscaled to 8bit 512px &times; 512px a
 |--------------------|--------------------|
 | <img src="https://github.com/cgcostume/pubg-maps/blob/master/athena/fortnite_athena_height_l16_preview.png" width="100%" alt="fortnite_athena_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/athena/fortnite_athena_normal_rg8_preview.png" width="100%" alt="fortnite_athena_normal_preview"> |
 
-Please note that the maps should be rotated by 90° counter clockwise when used (requires normals to be converted appropriately).
+Please note that the Fortnite map should be rotated by 90° counter clockwise when used which requires the normals to be converted accordingly.
 
 
 ## How-To/DIY
