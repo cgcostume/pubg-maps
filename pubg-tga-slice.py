@@ -25,7 +25,7 @@ args = parser.parse_args()
 tslHeightmapPathsByMap =  {
 	'erangel' : r'Maps\Erangel\Art\Heightmap', 
 	'miramar' : r'Maps\Desert\Art\Heightmap',
-	'sanhok' : r'Maps\Savage\Art\Heightmap', }
+	'sanhok' :  r'Maps\Savage\Art\Heightmap', }
 
 
 mapIdentifier = args.map.lower()
