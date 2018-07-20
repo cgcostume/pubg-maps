@@ -1,4 +1,4 @@
-# PlayerUnknown's Battlegrounds | Terrain Maps
+# PUBG & Fortnite | Terrain Maps
 
 PlayerUnknown's Battlegrounds currently features three maps: Erangel, Miramar, and Sanhok. This repository provides information and scripts for extracting elevation and normal maps from the game's sources. 
 
@@ -16,6 +16,13 @@ Please note that all preview images are downscaled to 8bit 512px &times; 512px a
 |--------------------|--------------------|
 | <img src="https://github.com/cgcostume/pubg-maps/blob/master/sanhok/pubg_sanhok_height_l16_preview.png" width="100%" alt="pubg_sanhok_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/sanhok/pubg_sanhok_normal_rg8_preview.png" width="100%" alt="pubg_sanhok_normal_preview"> |
 
+#### Fortnite | Experimental
+
+| Athena Height Map | Athena Normal Map |
+|--------------------|--------------------|
+| <img src="https://github.com/cgcostume/pubg-maps/blob/master/sanhok/fortnite_athena_height_l16_preview.png" width="100%" alt="fortnite_athena_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/sanhok/fortnite_athena_normal_rg8_preview.png" width="100%" alt="fortnite_athena_normal_preview"> |
+
+
 ## How-To/DIY
 
 Please note that the following steps might change with respect to the PUBG version, asset provisioning and structure.
@@ -30,6 +37,10 @@ Please note that the following steps might change with respect to the PUBG versi
 .\pubg-tga-slice.py -p .\UmodelExport\ -m erangel
 .\pubg-tga-slice.py -p .\UmodelExport\ -m miramar
 .\pubg-tga-slice.py -p .\UmodelExport\ -m sanhok
+```
+... or experimental fortnite extract:
+```
+.\fortnite-tga-slice.py -p .\UmodelExport\ -m athena
 ```
 That's it. If the script exits without errors there shoud be 8192px &times; 8192px losless height and normal maps.
 
