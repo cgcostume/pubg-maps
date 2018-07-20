@@ -20,7 +20,7 @@ Please note that all preview images are downscaled to 8bit 512px &times; 512px a
 
 | Athena Height Map | Athena Normal Map |
 |--------------------|--------------------|
-| <img src="https://github.com/cgcostume/pubg-maps/blob/master/sanhok/fortnite_athena_height_l16_preview.png" width="100%" alt="fortnite_athena_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/sanhok/fortnite_athena_normal_rg8_preview.png" width="100%" alt="fortnite_athena_normal_preview"> |
+| <img src="https://github.com/cgcostume/pubg-maps/blob/master/athena/fortnite_athena_height_l16_preview.png" width="100%" alt="fortnite_athena_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/athena/fortnite_athena_normal_rg8_preview.png" width="100%" alt="fortnite_athena_normal_preview"> |
 
 
 ## How-To/DIY
