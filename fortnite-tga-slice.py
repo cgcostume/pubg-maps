@@ -28,7 +28,7 @@ mapIdentifier = args.map.lower()
 if mapIdentifier not in  { 'athena' }:
     sys.exit('unknown map identifier \'' + mapIdentifier + '\'')
 
-numTiles = 132 # 10²
+numTiles = 144 # 10²
 
 
 assert os.path.isdir(args.umodel_export_path)
@@ -55,7 +55,6 @@ tile_height = { 0: 128 }[lod]
 # tile_offset = int({ 0: 0, 1: 512 * 512 * 4 * (1.0), 2: 512 * 512 * 4 * (1.0 + 0.25)}[lod])
 
 tile_scale = 12;
-tile_scale_y = 11;
 tile_size = int(tile_width * tile_height)
 # tile_size_with_mipmaps = int(tile_size * tile_channels * (1.00 + 0.25 + 0.0625))
 
@@ -130,8 +129,8 @@ def extract_tiles(asset_path, offsets, height_target, normal_target):
 
 print ('extracting', numTiles, 'tiles (normal and height data) ...')
 
-normal_composite = Image.new("RGB", (tile_width * tile_scale, tile_height * tile_scale_y))
-height_composite = Image.new("I", (tile_width * tile_scale, tile_height * tile_scale_y))
+normal_composite = Image.new("RGB", (tile_width * tile_scale, tile_height * tile_scale))
+height_composite = Image.new("I", (tile_width * tile_scale, tile_height * tile_scale))
 
 
 athena_indices = {
@@ -197,7 +196,7 @@ normal_composite.save(normal_stitched_path, 'PNG', compress_level = min(9, compr
 
 if args.thumbnail:
 	normal_stitched_path = os.path.join(output_path, 'fortnite_' + mapIdentifier + '_' + normal_semantic + '_preview.png')
-	normal_composite.thumbnail((704, 768), Image.BILINEAR)
+	normal_composite.thumbnail((512, 512), Image.BILINEAR)
 	normal_composite.save(normal_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
 
 
@@ -208,5 +207,5 @@ height_composite.save(height_stitched_path, 'PNG', compress_level = min(9, compr
 
 if args.thumbnail:
 	height_stitched_path = os.path.join(output_path, 'fortnite_' + mapIdentifier + '_' + height_semantic + '_preview.png')
-	height_composite.thumbnail((704, 768), Image.BILINEAR)
+	height_composite.thumbnail((512, 512), Image.BILINEAR)
 	height_composite.save(height_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
