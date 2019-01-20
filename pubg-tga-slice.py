@@ -26,15 +26,17 @@ args = parser.parse_args()
 tslHeightmapPathsByMap =  {
 	'erangel' : r'Maps\Erangel\Art\Heightmap', 
 	'miramar' : r'Maps\Desert\Art\Heightmap',
-	'sanhok' :  r'Maps\Savage\Art\Heightmap', }
+	'sanhok' :  r'Maps\Savage\Art\Heightmap',
+        'vikendi' : r'Maps\DihorOtok\Art\HeightMap', }
 
 
 mapIdentifier = args.map.lower()
-if mapIdentifier not in  {'erangel', 'miramar', 'sanhok' }:
+if mapIdentifier not in  {'erangel', 'miramar', 'sanhok', 'vikendi' }:
     sys.exit('unknown map identifier \'' + mapIdentifier + '\'')
 
 smallMap = mapIdentifier == 'sanhok'
-numTiles = 64 if smallMap else 256
+mediumMap = mapIdentifier == 'vikendi'
+numTiles = 64 if smallMap else 176 if mediumMap else 256
 
 
 assert os.path.isdir(args.umodel_export_path)
@@ -60,7 +62,7 @@ tile_height = { 0: 512, 1: 256, 2: 128 }[lod]
 # tile_channels = 4
 # tile_offset = int({ 0: 0, 1: 512 * 512 * 4 * (1.0), 2: 512 * 512 * 4 * (1.0 + 0.25)}[lod])
 
-tile_scale = 8 if smallMap else 16;
+tile_scale = 8 if smallMap else 12 if mediumMap else 16;
 tile_size = int(tile_width * tile_height)
 # tile_size_with_mipmaps = int(tile_size * tile_channels * (1.00 + 0.25 + 0.0625))
 
@@ -139,8 +141,9 @@ print ('extracting', numTiles, 'tiles (normal and height data) ...')
 normal_composite = Image.new("RGB", (tile_width * tile_scale, tile_height * tile_scale))
 height_composite = Image.new("I", (tile_width * tile_scale, tile_height * tile_scale))
 
+indicespos = [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2), (2, 0), (2, 1), (2, 2),] if mediumMap else [(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3), (3, 0), (3, 1), (3, 2), (3, 3)]
 
-for indices in [(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3), (3, 0), (3, 1), (3, 2), (3, 3)]:
+for indices in indicespos:
  	# example '.\UmodelExport\Maps\Erangel\Art\Heightmap\Heightmap_x0_y0_00_sharedAssets\Texture2D_0.tga'
 	
 	path = 'Heightmap_x%d_y%d_'
