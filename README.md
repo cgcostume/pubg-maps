@@ -1,6 +1,6 @@
 # PUBG & Fortnite | Terrain Maps
 
-PlayerUnknown's Battlegrounds currently features three maps: Erangel, Miramar, and Sanhok. This repository provides information and scripts for extracting elevation and normal maps from the game's sources. 
+PlayerUnknown's Battlegrounds currently features four maps: Erangel, Miramar, Sanhok and Vikendi. This repository provides information and scripts for extracting elevation and normal maps from the game's sources. 
 
 Please note that all preview images are downscaled to 8bit 512px &times; 512px and should not be used for rendering (normal data is downsampled using bicubic resampling).
 
@@ -15,6 +15,10 @@ Please note that all preview images are downscaled to 8bit 512px &times; 512px a
 | Sanhok Height Map | Sanhok Normal Map |
 |--------------------|--------------------|
 | <img src="https://github.com/cgcostume/pubg-maps/blob/master/sanhok/pubg_sanhok_height_l16_preview.png" width="100%" alt="pubg_sanhok_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/sanhok/pubg_sanhok_normal_rg8_preview.png" width="100%" alt="pubg_sanhok_normal_preview"> |
+
+| Vikendi Height Map | Vikendi Normal Map |
+|--------------------|--------------------|
+| <img src="https://github.com/cgcostume/pubg-maps/blob/master/vikendi/pubg_vikendi_height_l16_preview.png" width="100%" alt="pubg_sanhok_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/vikendi/pubg_vikendi_normal_rg8_preview.png" width="100%" alt="pubg_sanhok_normal_preview"> |
 
 #### Fortnite | Experimental
 
@@ -31,14 +35,15 @@ Please note that the following steps might change with respect to the PUBG versi
 
 1. **Download** the UE Viewer by Gildor's Homepage  (`umodel.exe`) - google for it, the sha256 hash of my file is (`56FAB4D29AC7B7800FA6B480D2C2BDA4A7FEC91CCE8B00A8DB77B71849047E96`) and it seems to be legit.
 2. **Locate** your PUBG directory, e.g., `C:\Program Files (x86)\Steam\steamapps\common\PUBG`.
-3. **Open** `pakchunk5000-WindowsNoEditor_heightmap.pak` (erangel), `pakchunk5100-WindowsNoEditor_heightmap.pak` (miramar|desert), or `pakchunk5200-WindowsNoEditor_heightmap.pak` (sanhok|savage). Please note that the pak files were AES encrypted recently (try google the AES key, e.g., on reddit or gildor's forum).
+3. **Open** `pakchunk5000-WindowsNoEditor_heightmap.pak` (erangel), `pakchunk5100-WindowsNoEditor_heightmap.pak` (miramar|desert), `pakchunk5200-WindowsNoEditor_heightmap.pak` (sanhok|savage), or `pakchunk5300-WindowsNoEditor_heightmap.pak` (vikendi|dihorotok). Please note that the pak files were AES encrypted recently (try google the AES key, e.g., on reddit or gildor's forum).
 4. **Filter** for `HeightMap` or `Texture2D_` (optional step)
-5. **Export** all height maps. This should create a `UmodelExport\Maps\Erangel\Art\Heightmap`, `UmodelExport\Maps\Desert\Art\Heightmap`, or `UmodelExport\Maps\Savage\Art\Heightmap` folder in your current working directory.
+5. **Export** all height maps. This should create a `UmodelExport\Maps\Erangel\Art\Heightmap`, `UmodelExport\Maps\Desert\Art\Heightmap`, or `UmodelExport\Maps\Savage\Art\Heightmap`, `UmodelExport\Maps\DihorOtok\Art\Heightmap` folder in your current working directory.
 6. **Run** `pubg-tga-slice.py` for extracting and encoding the relevant tile data into losless 16bit and 8bit pngs:
 ```
 .\pubg-tga-slice.py -p .\UmodelExport\ -m erangel
 .\pubg-tga-slice.py -p .\UmodelExport\ -m miramar
 .\pubg-tga-slice.py -p .\UmodelExport\ -m sanhok
+.\pubg-tga-slice.py -p .\UmodelExport\ -m vikendi
 ```
 ... or experimental fortnite extract:
 ```
