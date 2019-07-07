@@ -1,6 +1,6 @@
 # PUBG & Fortnite | Terrain Maps
 
-PlayerUnknown's Battlegrounds currently features four maps: Erangel, Miramar, Sanhok and Vikendi. This repository provides information and scripts for extracting elevation and normal maps from the game's sources. 
+PlayerUnknown's Battlegrounds currently features five maps: Erangel, Miramar, Range, Sanhok and Vikendi. This repository provides information and scripts for extracting elevation and normal maps from the game's sources. 
 
 Please note that all preview images are downscaled to 8bit 512px &times; 512px and should not be used for rendering (normal data is downsampled using bicubic resampling).
 
@@ -11,6 +11,10 @@ Please note that all preview images are downscaled to 8bit 512px &times; 512px a
 | Miramar Height Map | Miramar Normal Map |
 |--------------------|--------------------|
 | <img src="https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_height_l16_preview.png" width="100%" alt="pubg_miramar_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/miramar/pubg_miramar_normal_rg8_preview.png" width="100%" alt="pubg_miramar_normal_preview"> |
+
+| Range Height Map | Range Normal Map |
+|--------------------|--------------------|
+| <img src="https://github.com/cgcostume/pubg-maps/blob/master/range/pubg_range_height_l16_preview.png" width="100%" alt="pubg_range_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/range/pubg_range_normal_rg8_preview.png" width="100%" alt="pubg_range_normal_preview"> |
 
 | Sanhok Height Map | Sanhok Normal Map |
 |--------------------|--------------------|
@@ -42,6 +46,7 @@ Please note that the following steps might change with respect to the PUBG versi
 ```
 .\pubg-tga-slice.py -p .\UmodelExport\ -m erangel
 .\pubg-tga-slice.py -p .\UmodelExport\ -m miramar
+.\pubg-tga-slice.py -p .\UmodelExport\ -m range
 .\pubg-tga-slice.py -p .\UmodelExport\ -m sanhok
 .\pubg-tga-slice.py -p .\UmodelExport\ -m vikendi
 ```

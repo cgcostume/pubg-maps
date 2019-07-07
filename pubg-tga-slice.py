@@ -24,17 +24,18 @@ args = parser.parse_args()
 #     'miramar' : 'TslGame-WindowsNoEditor_desert_heightmap.pak' }
 
 tslHeightmapPathsByMap =  {
-	'erangel' : r'Maps\Erangel\Art\Heightmap', 
-	'miramar' : r'Maps\Desert\Art\Heightmap',
-	'sanhok' :  r'Maps\Savage\Art\Heightmap',
-        'vikendi' : r'Maps\DihorOtok\Art\HeightMap', }
+	'erangel' : r'Maps//Erangel//Art//Heightmap', 
+	'miramar' : r'Maps//Desert//Art//Heightmap',
+	'range' : r'Maps//Range//Art//Heightmap',
+	'sanhok' :  r'Maps//Savage//Art//Heightmap',
+	'vikendi' : r'Maps//DihorOtok//Art//HeightMap', }
 
 
 mapIdentifier = args.map.lower()
-if mapIdentifier not in  {'erangel', 'miramar', 'sanhok', 'vikendi' }:
+if mapIdentifier not in  {'erangel', 'miramar', 'range', 'sanhok', 'vikendi' }:
     sys.exit('unknown map identifier \'' + mapIdentifier + '\'')
 
-smallMap = mapIdentifier == 'sanhok'
+smallMap = mapIdentifier == 'sanhok' or mapIdentifier == 'range' 
 mediumMap = mapIdentifier == 'vikendi'
 numTiles = 64 if smallMap else 176 if mediumMap else 256
 
