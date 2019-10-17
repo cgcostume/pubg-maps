@@ -54,7 +54,7 @@ Please note that the following steps might change with respect to the PUBG versi
 ```
 .\fortnite-tga-slice.py -p .\UmodelExport\ -m athena
 ```
-That's it. If the script exits without errors there shoud be 8192px &times; 8192px losless height and normal maps.
+That's it. If the script exits without errors there should be 8192px &times; 8192px losless height and normal maps.
 
 
 ## How-To/DIY | DEPRECATED (ubulk approach)
