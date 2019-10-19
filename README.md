@@ -28,7 +28,7 @@ Please note that all preview images are downscaled to 8bit 512px &times; 512px a
 
 | Apollo Height Map | Apollo Normal Map |
 |--------------------|--------------------|
-| <img src="https://github.com/cgcostume/pubg-maps/blob/master/apollo/fortnite_apollo_height_l16_preview.png" width="100%" alt="fortnite_apollo_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/apollo/fortnite_athena_apollo_rg8_preview.png" width="100%" alt="fortnite_apollo_normal_preview"> |
+| <img src="https://github.com/cgcostume/pubg-maps/blob/master/apollo/fortnite_apollo_height_l16_preview.png" width="100%" alt="fortnite_apollo_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/apollo/fortnite_apollo_normal_rg8_preview.png" width="100%" alt="fortnite_apollo_normal_preview"> |
 
 Please note that the Fortnite map should be rotated by 90° counter clockwise (and the normals converted accordingly).
 
