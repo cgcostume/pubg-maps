@@ -26,9 +26,9 @@ Please note that all preview images are downscaled to 8bit 512px &times; 512px a
 
 #### Fortnite | Experimental
 
-| Athena Height Map | Athena Normal Map |
+| Apollo Height Map | Apollo Normal Map |
 |--------------------|--------------------|
-| <img src="https://github.com/cgcostume/pubg-maps/blob/master/athena/fortnite_athena_height_l16_preview.png" width="100%" alt="fortnite_athena_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/athena/fortnite_athena_normal_rg8_preview.png" width="100%" alt="fortnite_athena_normal_preview"> |
+| <img src="https://github.com/cgcostume/pubg-maps/blob/master/apollo/fortnite_apollo_height_l16_preview.png" width="100%" alt="fortnite_apollo_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/apollo/fortnite_athena_apollo_rg8_preview.png" width="100%" alt="fortnite_apollo_normal_preview"> |
 
 Please note that the Fortnite map should be rotated by 90° counter clockwise (and the normals converted accordingly).
 
@@ -50,11 +50,12 @@ Please note that the following steps might change with respect to the PUBG versi
 .\pubg-tga-slice.py -p .\UmodelExport\ -m sanhok
 .\pubg-tga-slice.py -p .\UmodelExport\ -m vikendi
 ```
-... or experimental fortnite extract:
+... or fortnite extract:
 ```
-.\fortnite-tga-slice.py -p .\UmodelExport\ -m athena
+.\fortnite-tga-slice.py -p .\UmodelExport\ -m apollo
+.\fortnite-tga-slice-athena.py -p .\UmodelExport\ -m athena
 ```
-That's it. If the script exits without errors there shoud be 8192px &times; 8192px losless height and normal maps.
+That's it. If the script exits without errors there should be 8192px &times; 8192px losless height and normal maps.
 
 
 ## How-To/DIY | DEPRECATED (ubulk approach)
