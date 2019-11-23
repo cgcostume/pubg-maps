@@ -20,31 +20,31 @@ parser.add_argument('-t', '--thumbnail', help = 'also generate 512² thumbnails'
 args = parser.parse_args()
 
 heightmap_paths = {
-  'erangel' : r'Game//Maps//Erangel//Art//Heightmap',
-  'miramar' : r'Game//Maps//Desert//Art//Heightmap',
-  'sanhok'  : r'Game//Maps//Savage//Art//Heightmap',
-  'jackal'  : r'Game//Maps//Range//Art//Heightmap',
-  'vikendi' : r'Game//Maps//DihorOtok//Art//Heightmap',
-  'baltic'  : r'Game//Maps//Baltic//Art//HeightMap',
-  'rapide'  : r'Game//Maps//Test//Rapide//Art//HeightMap',
-  'airange' : r'Game//Maps//AI_ShootingRange//AI_ShootingRange'
+    'erangel' : r'Game//Maps//Erangel//Art//Heightmap',
+    'miramar' : r'Game//Maps//Desert//Art//Heightmap',
+    'sanhok'  : r'Game//Maps//Savage//Art//Heightmap',
+    'jackal'  : r'Game//Maps//Range//Art//Heightmap',
+    'vikendi' : r'Game//Maps//DihorOtok//Art//Heightmap',
+    'baltic'  : r'Game//Maps//Baltic//Art//HeightMap',
+    'rapide'  : r'Game//Maps//Test//Rapide//Art//HeightMap',
+    'airange' : r'Game//Maps//AI_ShootingRange//AI_ShootingRange'
 }
 
 # (width, height, indexRange)
 map_size_data = {
-  'erangel' : (16, 16, 4),
-  'miramar' : (16, 16, 4),
-  'sanhok'  : ( 8,  8, 4),
-  'jackal'  : ( 8,  8, 4),
-  'vikendi' : (12, 12, 3),
-  'baltic'  : (16, 16, 4),
-  'rapide'  : ( 8,  8, 4),
-  'airange' : ( 5,  1, 1)
+    'erangel' : (16, 16, 4),
+    'miramar' : (16, 16, 4),
+    'sanhok'  : ( 8,  8, 4),
+    'jackal'  : ( 8,  8, 4),
+    'vikendi' : (12, 12, 3),
+    'baltic'  : (16, 16, 4),
+    'rapide'  : ( 8,  8, 4),
+    'airange' : ( 5,  1, 1)
 }
 
 map_identifier = args.map.lower()
 if map_identifier not in heightmap_paths:
-  sys.exit('Unknown map identifier \'' + map_identifier + '\'')
+    sys.exit('Unknown map identifier \'' + map_identifier + '\'')
 
 map_size = map_size_data.get(map_identifier)
 map_size_max = max(map_size[0], map_size[1])
@@ -58,7 +58,7 @@ assert os.path.isdir(umodel_heightmap_path)
 
 output_path = args.output_path
 if not os.path.isdir(output_path):
-  os.makedirs(output_path)
+    os.makedirs(output_path)
 assert os.path.isdir(output_path)
 
 
@@ -81,78 +81,78 @@ tile_size = int(tile_width * tile_height)
 
 def extract_tiles(asset_path, offsets, height_target, normal_target):
 
-  tile_indices = [[133, 141, 149, 157, 165]] if map_identifier == 'airange' else [[0, 1, 2, 3]] if small_map else [[0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3]]
-  num_indices = len(numpy.array(tile_indices).flatten())
+    tile_indices = [[133, 141, 149, 157, 165]] if map_identifier == 'airange' else [[0, 1, 2, 3]] if small_map else [[0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3]]
+    num_indices = len(numpy.array(tile_indices).flatten())
 
-  offset_scale = 2 if small_map else 4
-  
-  rjust_len = len(str(num_tiles))
+    offset_scale = 2 if small_map else 4
 
-  sequence_index = 0
-  for i, indices in enumerate(tile_indices):
-    for j, tile_index in enumerate(indices):
+    rjust_len = len(str(num_tiles))
 
-      if map_identifier == 'airange':
-        tile_path = asset_path % (tile_index)
-      elif small_map:
-        tile_path = asset_path % (offsets[0], offsets[1], tile_index)
-      else:
-        tile_path = asset_path % (offsets[0], offsets[1], i, tile_index)
-  
-      tile = Image.open(tile_path)
-      tile_r, tile_g, tile_b, tile_a = tile.split()
+    sequence_index = 0
+    for i, indices in enumerate(tile_indices):
+        for j, tile_index in enumerate(indices):
 
-      # extract normal  
-      
-      channel_r = numpy.asarray(tile_b).flatten()
-      channel_g = numpy.asarray(tile_a).flatten()
+            if map_identifier == 'airange':
+                tile_path = asset_path % (tile_index)
+            elif small_map:
+                tile_path = asset_path % (offsets[0], offsets[1], tile_index)
+            else:
+                tile_path = asset_path % (offsets[0], offsets[1], i, tile_index)
 
-      channel_b = numpy.resize(numpy.uint8(), tile_size)
-      channel_b.fill(255)
+            tile = Image.open(tile_path)
+            tile_r, tile_g, tile_b, tile_a = tile.split()
 
-      rgb = numpy.dstack((channel_r, channel_g, channel_b)).flatten()
+            # extract normal
 
-      # # extract elevation
+            channel_r = numpy.asarray(tile_b).flatten()
+            channel_g = numpy.asarray(tile_a).flatten()
 
-      channel_l = numpy.left_shift(numpy.asarray(tile_r, numpy.uint16()).flatten(), 8)
-      channel_l = channel_l + numpy.asarray(tile_g).flatten()
-    
-      # refine stitching sequence
+            channel_b = numpy.resize(numpy.uint8(), tile_size)
+            channel_b.fill(255)
 
-      if map_identifier == 'airange':
-        x = j
-        y = 0
-      else:
-        x = offsets[0] * offset_scale + (i % 2) * 2 + (j % 2)
-        y = offsets[1] * offset_scale + int(i / 2) * 2 + int(j / 2)
+            rgb = numpy.dstack((channel_r, channel_g, channel_b)).flatten()
 
-      ordered_index = y * 16 + x
+            # extract elevation
 
-      # paste data
+            channel_l = numpy.left_shift(numpy.asarray(tile_r, numpy.uint16()).flatten(), 8)
+            channel_l = channel_l + numpy.asarray(tile_g).flatten()
 
-      target_x = (ordered_index % 16) * tile_width
-      target_y = math.floor(ordered_index / 16) * tile_height
+            # refine stitching sequence
 
-      # write normal tile
-      
-      normal_tile = Image.frombytes('RGB', (tile_width, tile_height), rgb)
-      normal_target.paste(normal_tile, (target_x, target_y))
+            if map_identifier == 'airange':
+                x = j
+                y = 0
+            else:
+                x = offsets[0] * offset_scale + (i % 2) * 2 + (j % 2)
+                y = offsets[1] * offset_scale + int(i / 2) * 2 + int(j / 2)
 
-      # write height tile
+            ordered_index = y * 16 + x
 
-      height_tile = Image.frombytes('I;16', (tile_width, tile_height), numpy.asarray(channel_l, order = 'C'))
-      height_target.paste(height_tile, (target_x, target_y))
+            # paste data
 
-      # display progress
+            target_x = (ordered_index % 16) * tile_width
+            target_y = math.floor(ordered_index / 16) * tile_height
 
-      progress = (offsets[0] * map_size[2] + offsets[1]) * num_indices + sequence_index + 1
-      
-      print ('Processing', str(progress).rjust(rjust_len, '0'), 'of', num_tiles, 
-        flush = True, end = ('\r' if progress < num_tiles else '\n'))
+            # write normal tile
 
-      sequence_index += 1
+            normal_tile = Image.frombytes('RGB', (tile_width, tile_height), rgb)
+            normal_target.paste(normal_tile, (target_x, target_y))
 
-  #   ubulk.close()
+            # write height tile
+
+            height_tile = Image.frombytes('I;16', (tile_width, tile_height), numpy.asarray(channel_l, order = 'C'))
+            height_target.paste(height_tile, (target_x, target_y))
+
+            # display progress
+
+            progress = (offsets[0] * map_size[2] + offsets[1]) * num_indices + sequence_index + 1
+
+            print ('Processing', str(progress).rjust(rjust_len, '0'), 'of', num_tiles, 
+                flush = True, end = ('\r' if progress < num_tiles else '\n'))
+
+            sequence_index += 1
+
+    # ubulk.close()
 
 
 
@@ -162,20 +162,20 @@ normal_composite = Image.new("RGB", (tile_width * map_size[0], tile_height * map
 height_composite = Image.new("I", (tile_width * map_size[0], tile_height * map_size[1]))
 
 for indices in [(a, b) for a in range(0, map_size[2]) for b in range(0, map_size[2])]:
-   # example '.\UmodelExport\Maps\Erangel\Art\Heightmap\Heightmap_x0_y0_00_sharedAssets\Texture2D_0.tga'
+     # example '.\UmodelExport\Maps\Erangel\Art\Heightmap\Heightmap_x0_y0_00_sharedAssets\Texture2D_0.tga'
 
-  path = ''
-  if map_identifier != 'airange':
-    path += 'Heightmap_x%d_y%d'
-    if not small_map:
-      path += '_0%d'
-    if map_identifier != 'rapide':
-      path += '_sharedAssets'
-    path += '\\'
-  path += 'Texture2D_%d.tga'
+    path = ''
+    if map_identifier != 'airange':
+        path += 'Heightmap_x%d_y%d'
+        if not small_map:
+            path += '_0%d'
+        if map_identifier != 'rapide':
+            path += '_sharedAssets'
+        path += '\\'
+    path += 'Texture2D_%d.tga'
 
-  asset_path = os.path.join(umodel_heightmap_path, path)
-  extract_tiles(asset_path, indices, height_composite, normal_composite)
+    asset_path = os.path.join(umodel_heightmap_path, path)
+    extract_tiles(asset_path, indices, height_composite, normal_composite)
 
 
 map_size_descriptor = str(int(map_size_max / 2) if (map_size_max / 2).is_integer else map_size_max / 2) + 'k'  # ['8k', '4k', '2k'][(lod + 1) if small_map else lod]
@@ -187,9 +187,9 @@ print (normal_stitched_path, 'Saving', map_size_descriptor, 'normal map ... hang
 normal_composite.save(normal_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
 
 if args.thumbnail:
-  normal_stitched_path = os.path.join(output_path, 'pubg_' + map_identifier + '_' + normal_semantic + '_preview.png')
-  normal_composite.thumbnail((512, 512), Image.BILINEAR)
-  normal_composite.save(normal_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
+    normal_stitched_path = os.path.join(output_path, 'pubg_' + map_identifier + '_' + normal_semantic + '_preview.png')
+    normal_composite.thumbnail((512, 512), Image.BILINEAR)
+    normal_composite.save(normal_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
 
 # export height map
 
@@ -198,8 +198,8 @@ print (height_stitched_path, 'Saving', map_size_descriptor, 'height map ... hang
 height_composite.save(height_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
 
 if args.thumbnail:
-  height_stitched_path = os.path.join(output_path, 'pubg_' + map_identifier + '_' + height_semantic + '_preview.png')
-  height_composite.thumbnail((512, 512), Image.BILINEAR)
-  height_composite.save(height_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
+    height_stitched_path = os.path.join(output_path, 'pubg_' + map_identifier + '_' + height_semantic + '_preview.png')
+    height_composite.thumbnail((512, 512), Image.BILINEAR)
+    height_composite.save(height_stitched_path, 'PNG', compress_level = min(9, compress), optimize = compress == 10)
 
 print('Done!')
