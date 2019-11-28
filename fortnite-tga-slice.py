@@ -102,8 +102,8 @@ def extract_tiles(asset_path, offsets, height_target, normal_target, texture_key
         
                 # refine stitching sequence
 
-                target_x = offset[0] * (tile_width + 1)
-                target_y = offset[1] * (tile_height + 1)
+                target_x = offset[0] * (tile_width - 1)
+                target_y = offset[1] * (tile_height - 1)
 
                 # since lobby texture is 512*512
                 if texture_key == 'LOBBY':
