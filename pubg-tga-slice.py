@@ -37,8 +37,8 @@ map_size_data = {
 	'erangelclassic' : (16, 16, 4),
 	'miramar' : (16, 16, 4),
 	'sanhok'  : ( 8,  8, 4),
-	'jackal'  : ( 8,  8, 4),
 	'vikendi' : (12, 12, 3),
+	'jackal'  : ( 8,  8, 4),
 
 	'rapide'  : ( 8,  8, 4),
 	'airange' : ( 5,  1, 1)
