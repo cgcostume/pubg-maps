@@ -10,9 +10,9 @@ from PIL import Image
 # parse arguments
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-p', '--umodel_export_path', help = 'umodel export path')
+parser.add_argument('-p', '--umodel_export_path', help = 'umodel export path', required=True)
 parser.add_argument('-o', '--output_path', help = 'working directory for extracting and stitching assets', default = '.')
-parser.add_argument('-m', '--map', help = 'map identifier, either erangel, erangelclassic, miramar, sanhok, vikendi, or jackal', default = 'erangel')
+parser.add_argument('-m', '--map', help = 'map identifier, either erangel, erangelclassic, miramar, sanhok, vikendi, karakin, or jackal', default = 'erangel')
 # parser.add_argument('-l', '--lod', help = 'level-of-detail, either 0, 1, or 2', default = '0')
 parser.add_argument('-c', '--compress', help = 'compression level, number between 0 and 10', default = '10')
 parser.add_argument('-t', '--thumbnail', help = 'also generate 512² thumbnails', action = 'store_true')
@@ -26,9 +26,10 @@ heightmap_paths = {
 	'sanhok'  : r'Game//Maps//Savage//Art//Heightmap',
 	'vikendi' : r'Game//Maps//DihorOtok//Art//Heightmap',
 	'jackal'  : r'Game//Maps//Range//Art//Heightmap',
+	'karakin' : r'Game//Maps//Summerland//Art//HeightMap',
 
-	'rapide'  : r'Game//Maps//Test//Rapide//Art//HeightMap',
-	'airange' : r'Game//Maps//AI_ShootingRange//AI_ShootingRange'
+	#'rapide'  : r'Game//Maps//Test//Rapide//Art//HeightMap',
+	#'airange' : r'Game//Maps//AI_ShootingRange//AI_ShootingRange'
 }
 
 # (width, height, indexRange)
@@ -37,18 +38,19 @@ map_size_data = {
 	'erangelclassic' : (16, 16, 4),
 	'miramar' : (16, 16, 4),
 	'sanhok'  : ( 8,  8, 4),
-	'jackal'  : ( 8,  8, 4),
 	'vikendi' : (12, 12, 3),
+	'jackal'  : ( 8,  8, 4),
+	'karakin' : ( 4,  4, 2)
 
-	'rapide'  : ( 8,  8, 4),
-	'airange' : ( 5,  1, 1)
+	#'rapide'  : ( 8,  8, 4),
+	#'airange' : ( 5,  1, 1)
 }
 
 map_identifier = args.map.lower()
 if map_identifier not in heightmap_paths:
 	sys.exit('Unknown map identifier \'' + map_identifier + '\'')
 
-map_size = map_size_data.get(map_identifier)
+map_size = map_size_data[map_identifier]
 map_size_max = max(map_size[0], map_size[1])
 small_map = map_size_max <= 8
 num_tiles = map_size[0] * map_size[1]
@@ -164,7 +166,7 @@ normal_composite = Image.new("RGB", (tile_width * map_size[0], tile_height * map
 height_composite = Image.new("I", (tile_width * map_size[0], tile_height * map_size[1]))
 
 for indices in [(a, b) for a in range(0, map_size[2]) for b in range(0, map_size[2])]:
-	# example '.\UmodelExport\Maps\Erangel\Art\Heightmap\Heightmap_x0_y0_00_sharedAssets\Texture2D_0.tga'
+	# example '.\UmodelExport\Game\Maps\Erangel\Art\Heightmap\Heightmap_x0_y0_00_sharedAssets\Texture2D_0.tga'
 
 	path = ''
 	if map_identifier != 'airange':
