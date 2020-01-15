@@ -26,7 +26,7 @@ heightmap_paths = {
 	'sanhok'  : r'Game//Maps//Savage//Art//Heightmap',
 	'vikendi' : r'Game//Maps//DihorOtok//Art//Heightmap',
 	'jackal'  : r'Game//Maps//Range//Art//Heightmap',
-  'karakin' : r'Game//Maps//Summerland//Art//HeightMap',
+	'karakin' : r'Game//Maps//Summerland//Art//HeightMap',
 
 	#'rapide'  : r'Game//Maps//Test//Rapide//Art//HeightMap',
 	#'airange' : r'Game//Maps//AI_ShootingRange//AI_ShootingRange'
@@ -40,7 +40,7 @@ map_size_data = {
 	'sanhok'  : ( 8,  8, 4),
 	'vikendi' : (12, 12, 3),
 	'jackal'  : ( 8,  8, 4),
-  'karakin' : ( 4,  4, 2)
+	'karakin' : ( 4,  4, 2)
 
 	#'rapide'  : ( 8,  8, 4),
 	#'airange' : ( 5,  1, 1)
