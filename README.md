@@ -1,16 +1,12 @@
 # PUBG & Fortnite | Terrain Maps
 
-*PlayerUnknown's Battlegrounds* currently features seven maps: Erangel, Erangel Classic, Miramar, Sanhok, Vikendi, Karakin, and Camp Jackal. This repository provides information and scripts for extracting elevation and normal maps from the game's sources. 
+*PlayerUnknown's Battlegrounds* currently features six maps: Erangel, Miramar, Sanhok, Vikendi, Karakin, and Camp Jackal. This repository provides information and scripts for extracting elevation and normal maps from the game's sources. 
 
 Please note that all preview images are downscaled to 8-bit 512px &times; 512px and should not be used for rendering (normal data is downsampled using bicubic resampling).
 
 | Erangel Height Map | Erangel Normal Map |
 |--------------------|--------------------|
 | ![PUBG - Erangel elevation preview](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_height_l16_preview.png) | ![PUBG - Erangel normal preview](https://github.com/cgcostume/pubg-maps/blob/master/erangel/pubg_erangel_normal_rg8_preview.png) |
-
-| Erangel Classic Height Map | Erangel Classic Normal Map |
-|----------------------------|----------------------------|
-| ![PUBG - Erangel Classic elevation preview](https://github.com/cgcostume/pubg-maps/blob/master/erangelclassic/pubg_erangelclassic_height_l16_preview.png) | ![PUBG - Erangel Classic normal preview](https://github.com/cgcostume/pubg-maps/blob/master/erangelclassic/pubg_erangelclassic_normal_rg8_preview.png) |
 
 | Miramar Height Map | Miramar Normal Map |
 |--------------------|--------------------|
@@ -49,14 +45,14 @@ Please note that the following steps might change with respect to the *PUBG* ver
 2. **Locate** your *PUBG* directory, e.g., `C:\Program Files (x86)\Steam\steamapps\common\PUBG`.
 3. **Open** your *PUBG* directory in UE Viewer, overriding game detection to 'Unreal engine 4.16'. Please note that the PAK files are AES encrypted (try Googling for the AES key, e.g., on Reddit or Gildor's forums).
 4. **Filter** for `HeightMap` or `Texture2D_` (optional step)
-5. **Export** all heightmaps. This should create a `UmodelExport\Game\Maps\Baltic\Art\HeightMap` (Erangel), `UmodelExport\Game\Maps\Erangel\Art\Heightmap` (Erangel Classic), `UmodelExport\Game\Maps\Desert\Art\Heightmap` (Miramar), `UmodelExport\Game\Maps\Savage\Art\Heightmap` (Sanhok), `UmodelExport\Game\Maps\DihorOtok\Art\Heightmap` (Vikendi), `UmodelExport\Game\Maps\Summerland\Art\HeightMap` (Karakin), or `UmodelExport\Game\Maps\Range\Art\Heightmap` (Camp Jackal) folder in your current working directory.
+5. **Export** all heightmaps. This should create a `UmodelExport\Game\Maps\Baltic\Art\HeightMap` (Erangel), `UmodelExport\Game\Maps\Desert\Art\Heightmap` (Miramar), `UmodelExport\Game\Maps\Savage\Art\Heightmap` (Sanhok), `UmodelExport\Game\Maps\DihorOtok\Art\Heightmap` (Vikendi), `UmodelExport\Game\Maps\Summerland\Art\HeightMap` (Karakin), or `UmodelExport\Game\Maps\Range\Art\Heightmap` (Camp Jackal) folder in your current working directory.
 6. **Run** `pubg-tga-slice.py` for extracting and encoding the relevant tile data into lossless 16-bit and 8-bit pngs:
 ```
 .\pubg-tga-slice.py -p .\UmodelExport\ -m erangel
-.\pubg-tga-slice.py -p .\UmodelExport\ -m erangelclassic
 .\pubg-tga-slice.py -p .\UmodelExport\ -m miramar
 .\pubg-tga-slice.py -p .\UmodelExport\ -m sanhok
 .\pubg-tga-slice.py -p .\UmodelExport\ -m vikendi
+.\pubg-tga-slice.py -p .\UmodelExport\ -m karakin
 .\pubg-tga-slice.py -p .\UmodelExport\ -m jackal
 ```
 ...or for *Fortnite* extraction:
