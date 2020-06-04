@@ -24,11 +24,15 @@ Please note that all preview images are downscaled to 8bit 512px &times; 512px a
 |--------------------|--------------------|
 | <img src="https://github.com/cgcostume/pubg-maps/blob/master/vikendi/pubg_vikendi_height_l16_preview.png" width="100%" alt="pubg_sanhok_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/vikendi/pubg_vikendi_normal_rg8_preview.png" width="100%" alt="pubg_sanhok_normal_preview"> |
 
-#### Fortnite | Experimental
+#### Fortnite
 
 | Apollo Height Map | Apollo Normal Map |
 |--------------------|--------------------|
 | <img src="https://github.com/cgcostume/pubg-maps/blob/master/apollo/fortnite_apollo_height_l16_preview.png" width="100%" alt="fortnite_apollo_elevation_preview"> | <img src="https://github.com/cgcostume/pubg-maps/blob/master/apollo/fortnite_athena_apollo_rg8_preview.png" width="100%" alt="fortnite_apollo_normal_preview"> |
+
+| Papaya Height Map | Papaya Normal Map |
+|-------------------|-------------------|
+| ![Fortnite - Papaya elevation preview](https://github.com/cgcostume/pubg-maps/blob/master/papaya/fortnite_papaya_height_l16_preview.png) | ![Fortnite - Papaya normal preview](https://github.com/cgcostume/pubg-maps/blob/master/papaya/fortnite_papaya_normal_rg8_preview.png) |
 
 Please note that the Fortnite map should be rotated by 90° counter clockwise (and the normals converted accordingly).
 
@@ -53,6 +57,7 @@ Please note that the following steps might change with respect to the PUBG versi
 ... or fortnite extract:
 ```
 .\fortnite-tga-slice.py -p .\UmodelExport\ -m apollo
+.\fortnite-tga-slice.py -p .\UmodelExport\ -m papaya
 .\fortnite-tga-slice-athena.py -p .\UmodelExport\ -m athena
 ```
 That's it. If the script exits without errors there should be 8192px &times; 8192px losless height and normal maps.

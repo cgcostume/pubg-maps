@@ -11,24 +11,27 @@ from PIL import Image
 parser = argparse.ArgumentParser()
 parser.add_argument('-p', '--umodel_export_path', help = 'umodel export path')
 parser.add_argument('-o', '--output_path', help = 'working directory for extracting and stitching assets', default = '.')
-parser.add_argument('-m', '--map', help = 'map identifier, currently only apollo', default = 'apollo')
+parser.add_argument('-m', '--map', help = 'map identifier, apollo and papaya', default = 'apollo')
 # parser.add_argument('-l', '--lod', help = 'level-of-detail, either 0, 1, or 2', default = '0')
 parser.add_argument('-c', '--compress', help = 'compression level, number between 0 and 10', default = '0')
-parser.add_argument('-t', '--thumbnail', help = 'also generate 512² thumbnails', action = 'store_true')
+parser.add_argument('-t', '--thumbnail', help = 'also generate 512 thumbnails', action = 'store_true')
 
 args = parser.parse_args()
 
 tslHeightmapPathsByMap =  {
         'apollo' : r'Game\Athena\Apollo\Maps\Landscape',
+        'papaya' : r'Game\Athena\Apollo\Maps\Special\Papaya\Landscape',
 }
 
 
 mapIdentifier = args.map.lower()
-if mapIdentifier not in  { 'apollo' }:
+if mapIdentifier not in  { 'apollo', 'papaya' }:
     sys.exit('unknown map identifier \'' + mapIdentifier + '\'')
 
-numTiles = 361 # 10²
-
+if mapIdentifier == 'apollo':
+        numTiles = 361
+elif mapIdentifier == 'papaya':
+        numTiles = 64
 
 assert os.path.isdir(args.umodel_export_path)
 umodel_heightmap_path = os.path.abspath(os.path.join(args.umodel_export_path, tslHeightmapPathsByMap[mapIdentifier]))
@@ -53,7 +56,11 @@ tile_height = { 0: 128 }[lod]
 # tile_channels = 4
 # tile_offset = int({ 0: 0, 1: 512 * 512 * 4 * (1.0), 2: 512 * 512 * 4 * (1.0 + 0.25)}[lod])
 
-tile_scale = 19;
+if mapIdentifier == 'apollo':
+        tile_scale = 19;
+elif mapIdentifier == 'papaya':
+        tile_scale = 8;
+
 tile_size = int(tile_width * tile_height)
 # tile_size_with_mipmaps = int(tile_size * tile_channels * (1.00 + 0.25 + 0.0625))
 
@@ -102,8 +109,8 @@ def extract_tiles(asset_path, offsets, height_target, normal_target, texture_key
         
                 # refine stitching sequence
 
-                target_x = offset[0] * tile_width
-                target_y = offset[1] * tile_height
+                target_x = offset[0] * (tile_width - 1)
+                target_y = offset[1] * (tile_height - 1)
 
                 # since lobby texture is 512*512
                 if texture_key == 'LOBBY':
@@ -281,21 +288,65 @@ apollo_indices = {
 
 }
 
+papaya_indices = {
+    
+        'A1': { 0: (6, 0), 10: (6, 1), 15: (7, 1), 5: (7, 0) },
+        
+        'A2': { 0: (5, 0), 10: (4, 0), 15: (5, 1), 5: (4, 1) },
+
+        'A3': { 0: (2, 0), 10: (2, 1), 15: (3, 1), 5: (3, 0) },
+
+        'A4': { 0: (0, 0), 10: (1, 0), 15: (1, 1), 5: (0, 1) },
+
+        'B1': { 0: (6, 2), 10: (7, 2), 15: (7, 3), 5: (6, 3) },
+        
+        'B2': { 0: (4, 2), 10: (5, 2), 15: (5, 3), 5: (4, 3) },
+        
+        'B3': { 0: (2, 2), 10: (3, 2), 15: (3, 3), 5: (2, 3) },
+        
+        'B4': { 0: (0, 2), 10: (1, 2), 15: (1, 3), 5: (0, 3) },
+        
+        'C1': { 0: (6, 4), 10: (6, 5), 15: (7, 5), 5: (7, 4) },
+        
+        'C2': { 0: (5, 4), 14: (4, 5), 20: (4, 4), 8: (5, 5) },
+        
+        'C3': { 0: (3, 4), 12: (2, 5), 17: (3, 5), 7: (2, 4) },
+        
+        'C4': { 0: (1, 4), 12: (0, 5), 17: (1, 5), 7: (0, 4) },
+
+        'D1': { 0: (7, 6), 12: (6, 7), 17: (7, 7), 7: (6, 6) },
+        
+        'D2': { 0: (5, 6), 12: (4, 7), 17: (5, 7), 7: (4, 6) },
+        
+        'D3': { 0: (3, 6), 12: (2, 7), 17: (3, 7), 7: (2, 6) },
+        
+        'D4': { 0: (1, 6), 12: (0, 7), 17: (1, 7), 7: (0, 6) },
+
+}
+
 
 if mapIdentifier == 'apollo':
         offset_lookup = apollo_indices
+elif mapIdentifier == 'papaya':
+        offset_lookup = papaya_indices
 
 for key in offset_lookup.keys():
         # example '.\UmodelExport\Athena\Apollo\Maps\Landscape\Apollo_Terrain_LS_AB12\Texture2D_0.tga'
         
         if mapIdentifier == 'apollo':
                 path = 'Apollo_Terrain_LS_' + str(key) + '\Texture2D_%d.tga'
+        elif mapIdentifier == 'papaya':
+                path = 'Apollo_Papaya_LS_' + str(key) + '\Texture2D_%d.tga'
+        
 
         asset_path = os.path.join(umodel_heightmap_path, path)
         extract_tiles(asset_path, offset_lookup[key], height_composite, normal_composite, str(key))
 
 
-map_size_info  = ['2.432k'][0]
+if mapIdentifier == 'apollo':
+        map_size_info  = ['2.432k'][0]
+elif mapIdentifier == 'papaya':
+        map_size_info  = ['1.024k'][0]
 
 normal_stitched_path = os.path.join(output_path, 'fortnite_' + mapIdentifier + '_' + normal_semantic + '_lod' + str(lod) + '.png')
 print (normal_stitched_path, 'saving', map_size_info, 'normal map ... hang in there')
