@@ -32,6 +32,11 @@ Please note that all preview images are downscaled to 8-bit 512px &times; 512px 
 |------------------------|------------------------|
 | ![PUBG - Camp Jackal elevation preview](https://github.com/cgcostume/pubg-maps/blob/master/jackal/pubg_jackal_height_l16_preview.png) | ![PUBG - Camp Jackal normal preview](https://github.com/cgcostume/pubg-maps/blob/master/jackal/pubg_jackal_normal_rg8_preview.png) |
 
+| Taego Height Map | Taego Normal Map |
+|------------------------|------------------------|
+| ![PUBG - Taego elevation preview](https://github.com/cgcostume/pubg-maps/blob/master/taego/pubg_taego_height_l16_preview.png) | ![PUBG - Taego normal preview](https://github.com/cgcostume/pubg-maps/blob/master/taego/pubg_taego_normal_rg8_preview.png) |
+
+
 #### Fortnite
 
 | Apollo Height Map | Apollo Normal Map |
@@ -62,6 +67,7 @@ Please note that the following steps might change with respect to the *PUBG* ver
 .\pubg-tga-slice.py -p .\UmodelExport\ -m sanhok
 .\pubg-tga-slice.py -p .\UmodelExport\ -m vikendi
 .\pubg-tga-slice.py -p .\UmodelExport\ -m jackal
+.\pubg-tga-slice.py -p .\UmodelExport\ -m taego
 ```
 ...or for *Fortnite* extraction:
 ```
